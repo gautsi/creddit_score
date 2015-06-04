@@ -40,7 +40,7 @@ def comment_to_db(comment, conn, table):
     conn.execute(table.insert(), [values])
 
 if __name__ == '__main__':
-    engine = create_engine('mysql+pymysql://root:tattwamasi@localhost/reddit_comments')
+    engine = create_engine('mysql+pymysql://gautam@localhost/reddit_comments')
     meta = MetaData()
     meta.reflect(bind=engine)
     comments = meta.tables['comments']
