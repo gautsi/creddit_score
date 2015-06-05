@@ -1,0 +1,312 @@
+
+\documentclass{beamer}
+%\usepackage{beamerarticle}
+\usepackage{fancyhdr}
+\usepackage{amsmath, amscd}
+%\usepackage{enumerate}
+\usepackage{amsthm}
+\usepackage{amssymb}
+%\usepackage[pdftex]{graphicx}
+\usepackage{verbatim}
+\usepackage[all]{xy}
+%\usepackage{hyperref}
+%\usepackage{homework}
+%\usepackage[top=1.5in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+
+\def\baselinestretch{1} % not quite double spaced
+
+
+\input{../../../mydefns/gsDefns}
+
+\mode<presentation>
+{
+  \usetheme{default}
+  \usecolortheme[RGB={46,100,115}]{structure}
+  \usecolortheme{crane}
+  \usecolortheme{orchid}
+  \usecolortheme{whale}
+  \useoutertheme{infolines}
+}
+
+
+\usepackage[english]{babel}
+
+
+\usepackage[latin1]{inputenc}
+
+
+\usepackage{times}
+
+\title[The smallest root of a growth polynomial]{The smallest root of a growth polynomial}
+
+
+\author[Sisodia]{Gautam Sisodia} 
+\date{December 10, 2014}
+
+\subject{Talks}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Growth polynomials}
+
+A \textcolor{red}{growth polynomial} is a polynomial of the form
+$$
+f(t) = 1 - c_1 t - c_2 t^2 - \cdots - c_n t^n
+$$
+
+\pause
+
+where the $c_i$'s
+\begin{itemize}
+\item are non-negative integers,
+\pause
+\item are relatively prime, and
+\pause
+\item have sum at least two. 
+\end{itemize}
+
+\pause
+
+\hfil
+
+\begin{ex}
+\begin{itemize}
+\item $1-2t$
+\pause
+\item $1-t-t^2$ 
+\pause
+\item $1-t^3-7t^4-t^8-2t^{10}$
+\end{itemize}
+\end{ex}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{The roots of $1-t-t^2$}
+
+$1-t-t^2$ has roots $\frac{-1 \pm \sqrt{5}}{2}$
+
+\pause
+
+\begin{figure}[h]
+\centering
+\makebox[\textwidth][c]{\includegraphics[width = \textwidth]{11}}
+\end{figure}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{The roots of $1-t-t^2-t^3$}
+
+\begin{figure}[h]
+\centering
+\makebox[\textwidth][c]{\includegraphics[width = 0.35\textwidth]{111}}
+\end{figure}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{The roots of $1-t-2t^4-3t^7$}
+
+\begin{figure}[h]
+\centering
+\makebox[\textwidth][c]{\includegraphics[width = 0.5\textwidth]{1002003}}
+\end{figure}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{The roots of $1-t^3-7t^4-t^8-2t^{10}$}
+
+\begin{figure}[h]
+\centering
+\makebox[\textwidth][c]{\includegraphics[width = 0.5\textwidth]{0017000102}}
+\end{figure}
+
+
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Conjecture}
+
+Every growth polynomial has a simple positive real root that is smallest in modulus amongst the roots of the polynomial.
+
+\pause
+
+\hfil
+
+\textcolor{blue}{
+the computational skills to generate a massive amount of evidence, and the 
+intuition to conjecture based on that evidence
+}
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{A similar result in the literature}
+
+Dr. Solomyak points me to
+
+\begin{thm}[Perron-Frobenius]
+If $B$ is a primitive matrix, then $B$ has a simple positive eigenvalue that is largest in modulus amongst the eigenvalues of $B$.  
+\end{thm}
+
+\pause
+
+
+\hfil
+
+\textcolor{blue}{an eagerness to seek advice from mentors and peers}
+
+\pause
+
+\hfil
+
+The eigenvalues of $B$ are exactly the roots of the characteristic polynomial of $B$.
+
+\pause
+
+\hfil
+
+growth polynomial $\leftrightarrow$ characteristic polynomial?
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Directed graphs}
+
+from $f(t) = 1-t-t^2-t^3$, draw $G = $
+
+$$
+\xymatrix@R=30pt@C=45pt{
+b \ar@/^15pt/@<-0.5ex>[dr] & & c \ar@/^15pt/[dd] \\
+& a \ar@/^15pt/[ul] \ar@/^15pt/@<-0.5ex>[ur] \ar@(l,d)[] \\
+& & d \ar@/^15pt/[ul]
+}
+$$
+
+\pause
+
+which has \textcolor{red}{incidence matrix} $M = $
+\begin{center}
+\begin{tabular}{c|cccc}
+& $a$ & $b$ & $c$ & $d$ \\
+\hline
+$a$ & 1 & 1 & 1 & 0 \\
+$b$ & 1 & 0 & 0 & 0 \\
+$c$ & 0 & 0 & 0 & 1 \\
+$d$ & 1 & 0 & 0 & 0
+\end{tabular}
+\end{center}
+
+\end{frame}
+
+\begin{frame}
+
+The characteristic polynomial of $M$ is
+
+\begin{align*}
+\det(tI - M) &= t^4 - t^3 - t^2 - t \\
+&= t^4 f(1/t)
+\end{align*}
+
+\pause
+
+\hfil
+
+$\implies$
+$$
+r \text{ is a nonzero eigenvalue of } M \iff 1/r \text{ is a root of } f(t)
+$$
+
+\end{frame}
+
+\begin{frame}
+\frametitle{}
+$$
+M^4 = \pma{
+7 & 4 & 4 & 2 \\
+4 & 2 & 2 & 1 \\
+2 & 1 & 1 & 1 \\
+4 & 2 & 2 & 1
+}
+$$
+
+i.e. $M$ is \tcr{primitive}
+
+\pause
+
+so Perron-Frobenius applies:
+\begin{itemize}
+\item $M$ has a simple positive eigenvalue that is largest in modulus amongst the eigenvalues of $M$, so
+\item $f$ has a simple positive root that is smallest in modulus amongst the roots of $f$
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{The idea}
+$$
+\xymatrix{
+&*+<10pt>[F-:<10pt>]\txt{Graph theory \\ \tcr{incidence matrices}} \ar@/^15pt/@{<->}[rd] & \\
+*+<10pt>[F-:<10pt>]\txt{Algebra \\ \tcr{growth polynomials}} \ar@/_15pt/@{<-->}[rr] \ar@/^15pt/@{<->}[ur] & & *+<10pt>[F-:<10pt>]\txt{Matrix analysis \\ \tcr{Perron-Frobenius}}
+}
+$$
+
+\pause
+
+\hfil
+\hfil
+
+\textcolor{blue}{the ability to connect insights from different disciplines}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{The result}
+
+\begin{thm}[Sisodia]
+Every growth polynomial has a simple positive real root that is smallest in modulus amongst the roots of the polynomial.
+\end{thm}
+
+\pause
+
+\hfil
+
+\textcolor{blue}{the commitment to see an idea through to completion}
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Thank you!}
+
+\hfil
+
+C. Holdaway and G. Sisodia. \tcb{Category equivalences involving graded modules over weighted path algebras and monomial algebras}. {\it Journal of algebra}, 405:75-91, 2014. \tcr{\href{http://arxiv.org/abs/1309.3352}{arXiv:1309.3352}}.
+
+\hfil
+
+G. Sisodia and S. P. Smith. \tcb{The Grothendieck groups of non-commutative non-noetherian analogues of $\mathbb{P}^1$ and regular algebras of global dimension two}. {\it Journal of algebra}, to appear. \tcr{\href{http://arxiv.org/abs/1403.0640}{arXiv:1403.0640}}.
+
+
+\end{frame}
+
+\end{document}
+
