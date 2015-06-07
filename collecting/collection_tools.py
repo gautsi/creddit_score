@@ -2,6 +2,7 @@ import praw as pr
 import time as tm
 from sqlalchemy import MetaData, create_engine
 from sqlalchemy.sql import select
+import random
 
 def subm_to_db(subm, conn, subm_table, com_table):
     values = {
@@ -21,14 +22,14 @@ def subm_to_db(subm, conn, subm_table, com_table):
     comments = pr.helpers.flatten_tree(subm.comments)
     
     for comment in comments:
-        comment_to_db(comment, conn, com_table)
+        comment_to_db(comment, subm, conn, com_table)
                     
 
-def comment_to_db(comment, conn, table):
+def comment_to_db(comment, subm, conn, table):
     values = {
             'comment_id' : comment.name,
             'user_id' : str(comment.author),
-            'submission_id' : submission.id,
+            'submission_id' : subm.name,
             'prev_comment_id' : comment.parent_id,
             'created' : int(comment.created),
             'timestamp' : int(tm.time()),
@@ -38,9 +39,11 @@ def comment_to_db(comment, conn, table):
             }
            
     conn.execute(table.insert(), [values])
-
-if __name__ == '__main__':
-    engine = create_engine('mysql+pymysql://gautam@localhost/reddit_comments')
+    
+def run_once():
+    
+    subreddits = ['dataisbeautiful', 'programming', 'technology', 'python', 'cpp']
+    engine = create_engine('mysql+pymysql://gautam@localhost/reddit_comments?charset=utf8')
     meta = MetaData()
     meta.reflect(bind=engine)
     comments = meta.tables['comments']
@@ -48,15 +51,18 @@ if __name__ == '__main__':
     conn = engine.connect()
     
     red = pr.Reddit(user_agent='creddit_score')
-    funny = red.get_subreddit('funny')
+    subr = red.get_subreddit(subreddits[random.randint(0,len(subreddits)-1)])
     
     sub_already_there = True
     while sub_already_there:
-        submission = funny.get_random_submission()
+        submission = subr.get_random_submission()
         s = select([submissions]).where(submissions.c.submission_id == submission.name)
         result = conn.execute(s).fetchall()
         sub_already_there = len(result) > 0
     subm_to_db(submission, conn, submissions, comments)
-    print "added {}, {}".format(submission.title, submission.num_comments)
+    print "added {} {}, {}".format(subr.name, submission.name, submission.num_comments)
     conn.close()
+
+if __name__ == '__main__':
+    run_once()
 
