@@ -1,3 +1,5 @@
+USE UTF!!!
+
 CREATE TABLE `reddit_comments`.`comments` (
   `idcomments` INT NOT NULL AUTO_INCREMENT,
   `comment_id` VARCHAR(45) NULL,
