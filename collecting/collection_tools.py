@@ -2,6 +2,7 @@ import praw as pr
 import time as tm
 from sqlalchemy import MetaData, create_engine
 from sqlalchemy.sql import select
+from sqlalchemy.exc import StatementError
 import random
 
 def subm_to_db(subm, conn, subm_table, com_table):
@@ -22,8 +23,10 @@ def subm_to_db(subm, conn, subm_table, com_table):
     comments = pr.helpers.flatten_tree(subm.comments)
     
     for comment in comments:
-        comment_to_db(comment, subm, conn, com_table)
-                    
+        try:
+            comment_to_db(comment, subm, conn, com_table)
+        except (UnicodeEncodeError, StatementError):
+            print "unicode error"
 
 def comment_to_db(comment, subm, conn, table):
     values = {
@@ -55,6 +58,7 @@ def run_once():
     
     sub_already_there = True
     while sub_already_there:
+        subr = red.get_subreddit(subreddits[random.randint(0,len(subreddits)-1)])
         submission = subr.get_random_submission()
         s = select([submissions]).where(submissions.c.submission_id == submission.name)
         result = conn.execute(s).fetchall()
