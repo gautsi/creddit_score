@@ -9,7 +9,8 @@ def subm_to_db(subm, conn, subm_table, com_table):
     
     subm_table_values = {
                          'submission_id' : subm.name,
-                         'subreddit' : subm.subreddit.title
+                         'subreddit' : subm.subreddit.title,
+                         'timestamp' : int(tm.time())
                          }
 
     conn.execute(subm_table.insert(), [subm_table_values])
@@ -19,6 +20,7 @@ def subm_to_db(subm, conn, subm_table, com_table):
                    'subm_title' : subm.title,
                    'subm_content' : subm.selftext,
                    'subm_created' : int(subm.created_utc),
+                   'subm_created_local' : int(subm.created),
                    'subm_score' : subm.score,
                    'subm_author' : str(subm.author),
                    'subm_num_comments' : subm.num_comments 
@@ -38,6 +40,7 @@ def comment_to_db(comment, subm_values, conn, table):
               'user_id' : str(comment.author),
               'prev_comment_id' : comment.parent_id,
               'created' : int(comment.created_utc),
+              'created_local' : int(comment.created),
               'timestamp' : int(tm.time()),
               'content' : comment.body,
               'subreddit' : comment.subreddit.title,
@@ -72,7 +75,11 @@ def run_once():
         result = conn.execute(s).fetchall()
         sub_already_there = len(result) > 0
         if sub_already_there:
-            print "sub already here {} in {}".format(submission.name, subr.title)
+            if submission.created_utc < 120000 and tm.time() - max([row[6] for row in result]) > 600 and submission.num_comments > 10:
+                sub_already_there = False
+                print "sub already here add {} in {}".format(submission.name, subr.title)
+            else:
+                print "sub already here ignore {} in {}".format(submission.name, subr.title)
     
     subm_to_db(submission, conn, submissions, comm_subm)
 
