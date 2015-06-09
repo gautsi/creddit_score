@@ -18,7 +18,7 @@ def subm_to_db(subm, conn, subm_table, com_table):
                    'submission_id' : subm.name,
                    'subm_title' : subm.title,
                    'subm_content' : subm.selftext,
-                   'subm_created' : int(subm.created),
+                   'subm_created' : int(subm.created_utc),
                    'subm_score' : subm.score,
                    'subm_author' : str(subm.author),
                    'subm_num_comments' : subm.num_comments 
@@ -37,7 +37,7 @@ def comment_to_db(comment, subm_values, conn, table):
               'comment_id' : comment.name,
               'user_id' : str(comment.author),
               'prev_comment_id' : comment.parent_id,
-              'created' : int(comment.created),
+              'created' : int(comment.created_utc),
               'timestamp' : int(tm.time()),
               'content' : comment.body,
               'subreddit' : comment.subreddit.title,
