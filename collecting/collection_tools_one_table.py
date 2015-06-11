@@ -75,7 +75,10 @@ def run_once():
         result = conn.execute(s).fetchall()
         sub_already_there = len(result) > 0
         if sub_already_there:
-            if submission.created_utc < 120000 and tm.time() - max([row[6] for row in result]) > 600 and submission.num_comments > 10:
+            if tm.time() - submission.created_utc < 120000\
+            and not result[0]['timestamp'] is None\
+            and tm.time() - max([row['timestamp'] for row in result]) > 600\
+            and submission.num_comments > 10:
                 sub_already_there = False
                 print "sub already here add {} in {}".format(submission.name, subr.title)
             else:
