@@ -56,7 +56,7 @@
 
     <div class="container">
     <div class="starter-template">
-        <h3>Enter your comment</h3>
+        <h3>Enter the thread and your comment</h3>
     </div>
 
     <div class = "container">
@@ -83,11 +83,17 @@
   
       <div class="container">
       <div class="starter-template">
+        {% if score != '' %}
         <h3>Score</h3>
-        <h2>{{score}}</h2>
+        <h4>{{score}}</h4>
+        {% endif %}
         
+        {% if suggestions|length > 0 %}
         <h3>Suggestions</h3>
-
+        {% for suggestion in suggestions %}
+        <h4>{{suggestion}}</h4>
+        {% endfor %}
+        {% endif %}
       </div><!-- /.container -->
 
     <!-- Bootstrap core JavaScript

@@ -9,7 +9,7 @@ red = pr.Reddit(user_agent='creddit_score')
 
 engine = create_engine('mysql+pymysql://gautam@localhost/reddit_comments_submissions')
 
-comments_df = pd.read_sql(sql="select * from comm_subm", con=engine)
+comments_df = pd.read_sql(sql="select * from comm_subm limit 10000", con=engine)
 
 comments_df['age'] = comments_df.created - comments_df.subm_created
 comments_df['comment_length'] = comments_df.content.apply(len)

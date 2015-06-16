@@ -44,7 +44,10 @@ def comment_to_db(comment, subm_values, conn, table):
               'timestamp' : int(tm.time()),
               'content' : comment.body,
               'subreddit' : comment.subreddit.title,
-              'score' : comment.score
+              'score' : comment.score,
+              'ups' : comment.ups,
+              'downs' : comment.downs,
+              'controversiality' : comment.controversiality
             }
     values.update(subm_values)
     try:
@@ -56,7 +59,7 @@ def comment_to_db(comment, subm_values, conn, table):
 
 def run_once():
     
-    subreddits = ['dataisbeautiful', 'programming', 'technology', 'python', 'cpp']
+    subreddits = ['dataisbeautiful', 'programming', 'technology', 'python', 'cpp', 'funny', 'news']
     
     engine = create_engine('mysql+pymysql://gautam@localhost/reddit_comments_submissions')
     meta = MetaData()
