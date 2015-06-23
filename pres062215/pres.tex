@@ -1,0 +1,196 @@
+
+\documentclass{beamer}
+%\usepackage{beamerarticle}
+\usepackage{fancyhdr}
+\usepackage{amsmath, amscd}
+%\usepackage{enumerate}
+\usepackage{amsthm}
+\usepackage{amssymb}
+%\usepackage[pdftex]{graphicx}
+\usepackage{verbatim}
+\usepackage[all]{xy}
+%\usepackage{hyperref}
+%\usepackage{homework}
+%\usepackage[top=1.5in, bottom=1in, left=1.25in, right=1.25in]{geometry}
+%\usepackage{booktabs}
+
+\def\baselinestretch{1} % not quite double spaced
+
+
+\input{gsDefns}
+
+\mode<presentation>
+{
+  \usetheme{default}
+  \usecolortheme[RGB={46,100,115}]{structure}
+  \usecolortheme{crane}
+  \usecolortheme{orchid}
+  \usecolortheme{whale}
+  \useoutertheme{infolines}
+}
+
+
+\usepackage[english]{babel}
+
+
+\usepackage[latin1]{inputenc}
+
+
+\usepackage{times}
+
+\title[cReddit score]{cReddit score}
+
+
+\author[Sisodia]{Gautam Sisodia} 
+
+\subject{Talks}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Hurtful and abusive comments on online forums}
+
+
+
+\pause
+
+\begin{figure}[h]
+\makebox[\textwidth][c]{\includegraphics[width = 0.6\textwidth]{reddit_blog_cropped}}
+\end{figure}
+
+\pause
+
+An example: two comments from the same thread
+
+\vspace{-0.4cm}
+\begin{figure}[h]
+\makebox[\textwidth][c]{\includegraphics[width = 0.8\textwidth]{low_score}}
+\end{figure}
+
+\pause
+
+\vspace{-0.5cm}
+\begin{figure}[h]
+\makebox[\textwidth][c]{\includegraphics[width = 0.8\textwidth]{high_score}}
+\end{figure}
+
+\pause
+
+Enter {\bf cReddit score}: Identify trollish comments {\it before} they're posted
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Data and models}
+
+Data
+\begin{itemize}
+\item Take the good (score $>$ 15) and bad (score $<$ 0) comments
+\pause
+\item Each class is 10\% ($\sim$2000 comments) of the full data set 
+\end{itemize}
+
+Two algorithms:
+\begin{itemize}
+\item Logistic regression on:
+\pause
+\begin{itemize}
+\item comment length
+\pause
+\item number of words
+\pause
+\item \% uppercase
+\pause
+\item \% internetspeak
+\pause
+\item \% profanity
+\end{itemize}
+\pause
+\item Naive Bayes on term frequencies
+\begin{itemize}
+\pause
+\item tokenize
+\pause
+\item lowercase
+\pause
+\item 1-grams to 4-grams
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Evaluation}
+
+\begin{itemize}
+\item Logistic is 56\% accurate, naive Bayes 62\%
+\pause
+\item BUT accuracy is not quite what I'm aiming for:
+\pause
+\begin{itemize}
+\item Logistic
+\begin{figure}
+\begin{tabular}{c|cc}
+& pred. bad & pred. good \\
+\hline
+actual bad &  522 &  420 \\
+actual good &  260 &  377
+\end{tabular}
+\end{figure}
+\pause
+\item naive Bayes
+\begin{figure}
+\begin{tabular}{c|cc}
+& pred. bad & pred. good \\
+\hline
+actual bad &  542 &  348 \\
+actual good &  240 &  439
+\end{tabular}
+\end{figure}
+\end{itemize}
+\end{itemize}
+
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{The effect of metadata on score}
+
+\begin{figure}[h]
+\centering
+\makebox[\textwidth][c]{\includegraphics[width = 0.9\textwidth]{scoreVSsubm_score}}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{ALL CAPS, no caps}
+
+\begin{figure}[h]
+\centering
+\makebox[\textwidth][c]{\includegraphics[width = 0.9\textwidth]{profVSupper}}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{About me!}
+
+\begin{figure}[h]
+\centering
+\makebox[\textwidth][c]{\includegraphics[width = 0.9\textwidth]{about_me}}
+\end{figure}
+
+\end{frame}
+
+
+\end{document}
+

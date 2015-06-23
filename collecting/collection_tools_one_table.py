@@ -59,7 +59,7 @@ def comment_to_db(comment, subm_values, conn, table):
 
 def run_once():
     
-    subreddits = ['dataisbeautiful', 'programming', 'technology', 'python', 'cpp', 'funny', 'news']
+    subreddits = ['dataisbeautiful', 'programming', 'technology', 'python', 'cpp', 'funny', 'news', 'science']
     
     engine = create_engine('mysql+pymysql://gautam@localhost/reddit_comments_submissions')
     meta = MetaData()

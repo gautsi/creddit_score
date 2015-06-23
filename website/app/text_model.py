@@ -7,6 +7,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.naive_bayes import MultinomialNB
 from textblob import TextBlob
+import pickle
 
 engine = create_engine('mysql+pymysql://gautam@localhost/reddit_comments_submissions')
 
@@ -74,4 +75,8 @@ text_mnb = Pipeline([('vect', CountVectorizer(ngram_range = (1,4), stop_words='e
                      ])
 
 text_mnb.fit(good_bad_df.content, good_bad_df.cls)
+
+write_file = open('text_mnb_first_dump', 'w')
+pickle.dump(text_mnb, write_file)
+
 
