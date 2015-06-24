@@ -25,22 +25,9 @@ submissions = meta.tables['submissions']
 conn = engine.connect()
 
 #Make dataframes
-comments_df = pd.read_sql(sql="select * from comm_subm limit 10000", con=engine)
+#comments_df = pd.read_sql(sql="select * from comm_subm limit 10000", con=engine)
 #submissions_df = pd.read_sql(sql="select * from submissions", con=engine)
 
-#Add features
-comments_df['age'] = comments_df.created - comments_df.subm_created
-comments_df['age_min'] = comments_df.age/60.0
-comments_df['age_min_log'] = np.log10(comments_df.age_min)
-comments_df['time_since_post'] = comments_df.timestamp - comments_df.created
-comments_df['time_since_post_min'] = comments_df.time_since_post/60.0
-comments_df['time_since_post_min_log'] = np.log10(comments_df.time_since_post_min)
-comments_df['color'] = comments_df.subreddit.apply(lambda x : subreddits.index(x))
-comments_df['comment_length'] = comments_df.content.apply(len)
-comments_df['comment_num_words'] = comments_df.content.apply(lambda x : len(x.split()))
-comments_df['comment_length_log'] = np.log10(comments_df.comment_length)
-comments_df['comment_num_words_log'] = np.log10(comments_df.comment_num_words)
-comments_df['subm_num_comments_log'] = np.log10(comments_df.subm_num_comments)
 
 
 
