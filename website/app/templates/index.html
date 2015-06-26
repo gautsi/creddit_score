@@ -1,99 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<!-- saved from url=(0048)http://getbootstrap.com/2.3.2/examples/hero.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>cReddit score</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
 
-    <title>cReddit score</title>    
-    <!-- Bootstrap core CSS -->
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Le styles -->
+    <link href="/static/css/hero_bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+    <link href="/static/css/hero_bootstrap-responsive.css" rel="stylesheet">
+    <!--<link href="/static/css/my_own.css" rel="stylesheet">-->
 
-    <!-- Custom styles for this template -->
-    <link href="starter-template.css" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <script src="../assets/js/html5shiv.js"></script>
     <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/images/updown.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/images/updown.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/images/updown.png">
+                    <link rel="apple-touch-icon-precomposed" href="/static/images/updown.png">
+                                   <link rel="shortcut icon" href="/static/images/updown.png">
   </head>
 
   <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">cReddit score</a>
+          <a class="brand" href="#">cReddit score</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#slides">Slides</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
         </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
       </div>
     </div>
-
-<br><br> 
-
-    <div class="container">
-    <div class="starter-template">
-        <h3>Enter your comment</h3>
-    </div>
-
-    <div class = "container">
-
-      <form  action="/" method="GET">
-
     
-            <div class="form-group">
-          <textarea class="form-control" rows="4" placeholder="Enter your comment here" name="comment">{{comment}}</textarea>
-        </div>
-        <div>
-          <button type="submit" class="btn btn-default btn-lg">Get your score!</button>
-        </div>
-      </form>
-    </div>
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="static/js/bootstrap.min.js"></script>
+    <div class="container">
 
-  </div> <!-- /.container-->
-  
-<br><br>
-  
-      <div class="container">
-      <div class="starter-template">
+      <!-- Main hero unit for a primary marketing message or call to action -->
+      <div class="hero-unit">
+      <div class="col-mid-12">
+
+        <h1>Hello, moderator!</h1>
+        <h3>Enter the comment in question, and get an estimate on its trollishness.</h3>
+        <form  action="/hero" method="GET">
+        <p>For example, <a href="?comment=Shut+up.+That%27s+oversimplifying+this+whole+issue+and+making+a+mockery+of+it.+%0D%0A%0D%0A%22Thing+is%2C+even+people+against+FPH+are+leaving.+Because+they+are+more+appalled+by+double+standards+and+thinly-veiled+censorship+than+a+bunch+of+angry+people+from+FPH.%22%0D%0A%0D%0A++quote+by+fazzah+because+they+already+said+what+I+was+getting+ready+to+explain.">this</a> comment got a very low score on Reddit. See what its cReddit score estimate is!</p>
+        <form  action="/hero" method="GET">
+            <textarea class="span11" rows="5" placeholder="Enter the comment here" name="comment">{{comment}}</textarea>
+        <button type="submit" class="btn btn-primary btn-large">Get the score!</button>
+        </form>
+        
         {% if score != '' %}
         <h3>Score</h3>
-        <h4>This comment has a {{score}}% chance of being trollish.</h4>
+        <p>This comment has a {{score}}% chance of being trollish.</p>
         {% endif %}
-        
-      </div><!-- /.container -->
 
-    <!-- Bootstrap core JavaScript
+      </div>          
+      </div>
+
+    <section id="about">
+    <div class="hero-unit">
+    <h3> About </h3>
+    </div>
+    </section>
+      
+    <section id="slides">
+    <div class="hero-unit">
+    <h3> Slides </h3>
+    <iframe src="//www.slideshare.net/slideshow/embed_code/key/8ygCVt7VkynGoo" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/GautamSisodia/creddit-score" title="cReddit Score" target="_blank">cReddit Score</a> </strong> from <strong><a href="//www.slideshare.net/GautamSisodia" target="_blank">Gautam Sisodia</a></strong> </div>
+    </div>
+    </section>
+
+
+    <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-  </body>
-</html>
+    <script src="./hero_files/jquery.js"></script>
+    <script src="./hero_files/bootstrap-transition.js"></script>
+    <script src="./hero_files/bootstrap-alert.js"></script>
+    <script src="./hero_files/bootstrap-modal.js"></script>
+    <script src="./hero_files/bootstrap-dropdown.js"></script>
+    <script src="./hero_files/bootstrap-scrollspy.js"></script>
+    <script src="./hero_files/bootstrap-tab.js"></script>
+    <script src="./hero_files/bootstrap-tooltip.js"></script>
+    <script src="./hero_files/bootstrap-popover.js"></script>
+    <script src="./hero_files/bootstrap-button.js"></script>
+    <script src="./hero_files/bootstrap-collapse.js"></script>
+    <script src="./hero_files/bootstrap-carousel.js"></script>
+    <script src="./hero_files/bootstrap-typeahead.js"></script>
 
+  
 
+</body></html>
