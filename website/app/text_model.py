@@ -9,6 +9,7 @@ from sklearn.naive_bayes import MultinomialNB
 from textblob import TextBlob
 import pickle
 
+#Make the database connection 
 engine = create_engine('mysql+pymysql://gautam@localhost/reddit_comments_submissions')
 
 classes = {'bad' : 0, 'neutral' : 1, 'good' : 2}
@@ -54,11 +55,12 @@ def add_features(df):
     df['subjectivity'] = df.content.apply(lambda x : TextBlob(x).subjectivity)
     
     
-
+#Get the data
 dib_df = pd.read_sql(sql="select *\
                      from comm_subm\
                      where subreddit='DataIsBeautiful'",                    
                      con=engine)
+
 
 comments_most_recent = dib_df.groupby(dib_df.comment_id).last()
 
@@ -69,13 +71,18 @@ bad_df = comments_most_recent[comments_most_recent.cls == 'bad']
 
 good_bad_df = pd.concat([good_df, bad_df])
 
+
+#Pipeline
+#For other classifiers, I'd just replace MultinomialNB (with random forest or logistic regression say) 
 text_mnb = Pipeline([('vect', CountVectorizer(ngram_range = (1,4), stop_words='english', max_features=1000)),
                     ('tfidf', TfidfTransformer(use_idf=False)),
                      ('gnb', MultinomialNB()),
                      ])
 
+#Fit the model
 text_mnb.fit(good_bad_df.content, good_bad_df.cls)
 
+#Dump it
 write_file = open('text_mnb_first_dump', 'w')
 pickle.dump(text_mnb, write_file)
 
