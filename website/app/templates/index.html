@@ -59,9 +59,9 @@
       <div class="hero-unit">
       <div class="col-mid-12">
 
-        <h1>Hello, moderator!</h1>
-        <h3>Enter the comment in question, and get an estimate on its trollishness.</h3>
-        <form  action="/hero" method="GET">
+        <h2>Hello, moderator!</h2>
+        <h3>Enter the comment in question, and get an estimate of its trollishness.</h3>
+        <form  action="/" method="GET">
         <p>For example, <a href="?comment=Shut+up.+That%27s+oversimplifying+this+whole+issue+and+making+a+mockery+of+it.+%0D%0A%0D%0A%22Thing+is%2C+even+people+against+FPH+are+leaving.+Because+they+are+more+appalled+by+double+standards+and+thinly-veiled+censorship+than+a+bunch+of+angry+people+from+FPH.%22%0D%0A%0D%0A++quote+by+fazzah+because+they+already+said+what+I+was+getting+ready+to+explain.">this</a> comment got a very low score on Reddit. See what its cReddit score estimate is!</p>
         <form  action="/hero" method="GET">
             <textarea class="span11" rows="5" placeholder="Enter the comment here" name="comment">{{comment}}</textarea>
@@ -70,7 +70,7 @@
         
         {% if score != '' %}
         <h3>Score</h3>
-        <p>This comment has a {{score}}% chance of being trollish.</p>
+        <p>This comment has a <b>{{score}}%</b> chance of being trollish.</p>
         {% endif %}
 
       </div>          

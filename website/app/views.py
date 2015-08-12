@@ -11,7 +11,7 @@ def cities_output():
   #thread_url = request.args.get('thread')
   comment = request.args.get('comment')
 
-  model_file = open('mnb_dump_2', 'r')
+  model_file = open('text_mnb_7423', 'r')
   model = pickle.load(model_file)  
 
   suggestions = []
